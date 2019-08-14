@@ -16,7 +16,6 @@ class App extends Component {
           <Route path="/"   render={(props)=><MWLayout {...props}> <Home/> </MWLayout>}   exact  />
           <Route path="/Cart"   render={(props)=><MWLayout {...props}><Cart/></MWLayout>}    />
           <Route path="/Mine"   render={(props)=><MWLayout {...props}><Mine/></MWLayout>}    />
-          {/* <Route path="/Category" component={Category} > </Route> */}
         </Router>
         </div>
       </Fragment>
