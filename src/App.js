@@ -1,12 +1,26 @@
 import React, { Component, Fragment } from 'react';
-import { Button, WhiteSpace, WingBlank } from 'antd-mobile';
- class App extends Component { 
- render() { 
- return ( 
- <Fragment>
-   <Button type="primary">primary</Button>
- </Fragment> 
- );  
-} 
- } 
- export default App;
+import { HashRouter as Router,Link,Route  } from "react-router-dom";
+import MWLayout from "./components/MWLayout";
+import Home from "./pages/Home";
+import Cart from "./pages/Cart";
+import Mine from "./pages/Mine";
+
+
+class App extends Component {
+  render() {
+   
+    return (
+      <Fragment>
+        <div>
+        <Router>
+          <Route path="/"   render={(props)=><MWLayout {...props}> <Home/> </MWLayout>}   exact  />
+          <Route path="/Cart"   render={(props)=><MWLayout {...props}><Cart/></MWLayout>}    />
+          <Route path="/Mine"   render={(props)=><MWLayout {...props}><Mine/></MWLayout>}    />
+          {/* <Route path="/Category" component={Category} > </Route> */}
+        </Router>
+        </div>
+      </Fragment>
+    );
+  }
+}
+export default App;
