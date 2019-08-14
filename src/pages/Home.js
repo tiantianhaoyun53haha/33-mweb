@@ -39,12 +39,19 @@ class Home extends Component {
   }
 
   render() {
-
+    /* 
+    1 请求还没有回来 标签已经渲染 正确
+    2 数据回来 标签重新渲染 
+    3 轮播图经过以上流程之后 自己不会重新触发轮播图的轮播 轮播图封装的问题！！！
+      1 数据还没有回来 我就不渲染标签
+      2 数据回来了 我再渲染标签 
+    
+     */
     return (
       <div className="mw_home" >
         {/* 轮播图 开始 */}
         <div className="mw_swiper">
-          <Carousel
+          { this.state.sliderlist.length && <Carousel
             autoplay
             infinite
           >
@@ -66,7 +73,8 @@ class Home extends Component {
                 />
               </a>
             ))}
-          </Carousel>
+          </Carousel> }
+         
         </div>
         {/* 轮播图 结束 */}
         {/* 推荐商品 开始 */}
