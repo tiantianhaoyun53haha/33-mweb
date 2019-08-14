@@ -35,7 +35,7 @@ class MWLayout extends React.Component {
             }}
 
           >
-            {this.props.children}
+            {this.props.match.url === "/"&&this.props.children}
           </TabBar.Item>
           <TabBar.Item
             icon={<span className="iconfont icon-gouwuche" />}
@@ -49,7 +49,7 @@ class MWLayout extends React.Component {
             }}
             data-seed="logId1"
           >
-            {this.props.children}
+            {this.props.match.url === "/Cart"&&this.props.children}
           </TabBar.Item>
           <TabBar.Item
             icon={<span className="iconfont icon-weibiaoti2fuzhi12" />}
@@ -61,7 +61,7 @@ class MWLayout extends React.Component {
               this.props.history.push("/Mine")
             }}
           >
-            {this.props.children}
+            {this.props.match.url === "/Mine"&&this.props.children}
           </TabBar.Item>
         </TabBar>
       </div>

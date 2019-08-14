@@ -26,7 +26,7 @@ class Home extends Component {
   getCatesList() {
     Axios.get("http://react.zbztb.cn/site/goods/getgoodsgroup")
       .then(res => {
-        // console.table(res.data.message);
+     
         this.setState({ cateslist: res.data.message });
       })
   }
@@ -39,6 +39,7 @@ class Home extends Component {
   }
 
   render() {
+
     return (
       <div className="mw_home" >
         {/* 轮播图 开始 */}
