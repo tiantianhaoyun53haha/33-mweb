@@ -41,7 +41,7 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props);
+ 
     /* 
     1 请求还没有回来 标签已经渲染 正确
     2 数据回来 标签重新渲染 

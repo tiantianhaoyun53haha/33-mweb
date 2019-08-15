@@ -21,3 +21,10 @@ export const getSliderList = () => Axios.get("/goods/gettopdata/goods");
  * 获取首页-分类商品
  */
 export const getCatesList = () => Axios.get("/goods/getgoodsgroup");
+
+
+/**
+ * 根据商品id获取商品详细信息
+ * @param {any} id 商品的id
+ */
+export const getGoodsInfo = (id) => Axios.get("/goods/getgoodsinfo/"+id);
