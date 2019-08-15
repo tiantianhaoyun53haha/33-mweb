@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Carousel, WingBlank } from 'antd-mobile';
-import Axios from "axios";
+
+import { getSliderList, getCatesList } from "../request";
 class Home extends Component {
   state = {
     // 轮播图的数组
@@ -14,20 +15,21 @@ class Home extends Component {
 
   // 获取轮播图数据&推荐商品的数据
   getSliderList() {
-    Axios.get("http://react.zbztb.cn/site/goods/gettopdata/goods")
+    getSliderList()
       .then(res => {
         this.setState({
-          sliderlist: res.data.message.sliderlist,
-          toplist: res.data.message.toplist
+          sliderlist: res.sliderlist,
+          toplist: res.toplist
         })
+      
       })
+
   }
   // 获取商品分类数据
   getCatesList() {
-    Axios.get("http://react.zbztb.cn/site/goods/getgoodsgroup")
+    getCatesList()
       .then(res => {
-     
-        this.setState({ cateslist: res.data.message });
+        this.setState({ cateslist: res});
       })
   }
 
@@ -51,7 +53,7 @@ class Home extends Component {
       <div className="mw_home" >
         {/* 轮播图 开始 */}
         <div className="mw_swiper">
-          { this.state.sliderlist.length && <Carousel
+          {this.state.sliderlist.length && <Carousel
             autoplay
             infinite
           >
@@ -73,8 +75,8 @@ class Home extends Component {
                 />
               </a>
             ))}
-          </Carousel> }
-         
+          </Carousel>}
+
         </div>
         {/* 轮播图 结束 */}
         {/* 推荐商品 开始 */}
@@ -101,9 +103,9 @@ class Home extends Component {
             <div key={v1.level1cateid} className="cate_group">
               <div className="cate_group_title">{v1.catetitle}</div>
               <div className="cate_group_content">
-                {v1.datas.map(v2=>(
+                {v1.datas.map(v2 => (
                   <a href="#" key={v2.artID}>
-                    <img src={v2.img_url} alt=""/>
+                    <img src={v2.img_url} alt="" />
                     <div className="goods_name">{v2.artTitle}</div>
                     <div className="goods_price_wrap">
                       <span className="news_price">￥{v2.sell_price}</span>
@@ -111,7 +113,7 @@ class Home extends Component {
                     </div>
                     <div className="goods_num_wrap">
                       <span>  热卖中</span>
-                    <span className="goods_num">{v2.stock_quantity}件</span>
+                      <span className="goods_num">{v2.stock_quantity}件</span>
                     </div>
                   </a>
                 ))}
