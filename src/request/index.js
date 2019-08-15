@@ -13,5 +13,11 @@ Axios.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 
+/**
+ * 获取首页轮播图和推荐商品
+ */
 export const getSliderList = () => Axios.get("/goods/gettopdata/goods");
+/**
+ * 获取首页-分类商品
+ */
 export const getCatesList = () => Axios.get("/goods/getgoodsgroup");
