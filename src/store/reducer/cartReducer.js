@@ -5,7 +5,7 @@ const defaultState = {
     title: "飞利浦",
     img_url: "http://react.zbztb.cn/upload/201504/20/thumb_201504200119256512.jpg",
     num: 1,
-    checked: true,
+    checked: false,
     price: 999
   },
   {
@@ -20,5 +20,33 @@ const defaultState = {
 
 // 2  暴露一个函数出去 函数 负责根据action的类型 来处理全局的数据
 export default (state = defaultState, action) => {
+
+  switch (action.type) {
+    case "item_change":
+      {
+        // 0 获取要修改的商品对象 id
+        const { id } = action.value;
+        // 1 获取源数组
+        let newState = JSON.parse(JSON.stringify(state));
+        // 2 获取要修改的元素的索引
+        let index = newState.carts.findIndex((v) => v.id === id);
+        newState.carts[index].checked = !newState.carts[index].checked;
+        // 3 直接返回state
+        return newState;
+        break;
+      }
+    case "item_all_check":
+      {
+        const {checked} = action.value;
+
+        let newState = JSON.parse(JSON.stringify(state));
+        newState.carts.forEach(v => v.checked = checked);
+        return newState;
+        break;
+      }
+    default:
+      break;
+  }
+
   return state;
 }
