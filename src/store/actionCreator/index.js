@@ -1,4 +1,4 @@
-import { ITEM_CHANGE, ITEM_ALL_CHECK } from "../actionTypes";
+import { ITEM_CHANGE, ITEM_ALL_CHECK, ITEM_NUM_UPDATE } from "../actionTypes";
 
 /**
  * 返回 切换选中商品的action
@@ -19,5 +19,20 @@ export const itemAllCheck = (checked) => {
   return {
     type: ITEM_ALL_CHECK,
     value: { checked }
+  }
+}
+
+
+
+/**
+ * 修改购物车的数量
+ * @param {number} unit +1或者-1
+ * @param {number} id 要操作的商品的id
+ */
+export const itemNumUpdate = (unit, id) => {
+  // +1 -1 
+  return {
+    type: ITEM_NUM_UPDATE,
+    value: { unit, id }
   }
 }

@@ -8,3 +8,8 @@ export const ITEM_CHANGE="ITEM_CHANGE";
  */
 export const ITEM_ALL_CHECK="ITEM_ALL_CHECK";
 
+/**
+ * 购物车数量 改变
+ */
+export const ITEM_NUM_UPDATE="ITEM_NUM_UPDATE";
+
