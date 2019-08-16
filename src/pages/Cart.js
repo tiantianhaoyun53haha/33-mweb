@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, NavBar, SwipeAction, Checkbox,Modal } from "antd-mobile";
+import { Icon, NavBar, SwipeAction, Checkbox, Modal } from "antd-mobile";
 
 // 1 准备接受store的数据
 import { connect } from "react-redux";
@@ -55,9 +55,9 @@ class Cart extends Component {
                   {/* 4 数量编辑工具 */}
                   <div className="goods_num_wrap">
                     <div>
-                      <div onClick={this.props.handleItemNumUpdate.bind(this,-1,v.id,v.num)} className="nums_operation">-</div>
+                      <div onClick={this.props.handleItemNumUpdate.bind(this, -1, v.id, v.num)} className="nums_operation">-</div>
                       <div className="goods_num">{v.num}</div>
-                      <div onClick={this.props.handleItemNumUpdate.bind(this,1,v.id,v.num)} className="nums_operation">+</div>
+                      <div onClick={this.props.handleItemNumUpdate.bind(this, 1, v.id, v.num)} className="nums_operation">+</div>
                     </div>
                   </div>
                 </div>
@@ -66,7 +66,6 @@ class Cart extends Component {
           )}
         </div>
         <div className="footer_tool">
-
           <div className="all_chk_wrap">
             <CheckboxItem onChange={this.props.itemAllCheck} checked={this.props.allChecked}>全选</CheckboxItem>
           </div>
@@ -249,33 +248,37 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(itemAllCheck(checked))
       // 4 遍历购物车的商品 让他们的选中状态 都等于取反后的状态
     },
-    handleItemNumUpdate:(unit,id,num)=>{
+    handleItemNumUpdate: (unit, id, num) => {
       // console.log(unit,id);
       // 1 当 当前的数量=1 同时 用户点击 “-” 弹窗询问是否要删除
-      if(unit===-1&&num===1){
+      if (unit === -1 && num === 1) {
         // 弹窗询问是否要删除
         alert('警告', '您确定删除吗？', [
           { text: '取消', onPress: () => console.log('cancel') },
-          { text: '删除', onPress: () => {
-            // 2 准备删除
-            dispatch(itemRemove(id));
-          } },
+          {
+            text: '删除', onPress: () => {
+              // 2 准备删除
+              dispatch(itemRemove(id));
+            }
+          },
         ])
-      }else{
+      } else {
 
-        dispatch(itemNumUpdate(unit,id))
+        dispatch(itemNumUpdate(unit, id))
       }
 
     },
     // 点击删除按钮
-    handleItemRemove:(id)=>{
+    handleItemRemove: (id) => {
       // 1 弹出确认框 询问用户是否要删除 
       alert('警告', '您确定删除吗？', [
         { text: '取消', onPress: () => console.log('cancel') },
-        { text: '删除', onPress: () => {
-          // 2 准备删除
-          dispatch(itemRemove(id));
-        } },
+        {
+          text: '删除', onPress: () => {
+            // 2 准备删除
+            dispatch(itemRemove(id));
+          }
+        },
       ])
     }
   }

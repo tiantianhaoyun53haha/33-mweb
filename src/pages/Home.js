@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Carousel } from 'antd-mobile';
 
 import { getSliderList, getCatesList } from "../request";
+
 class Home extends Component {
   state = {
     // 轮播图的数组
@@ -21,7 +22,7 @@ class Home extends Component {
           sliderlist: res.sliderlist,
           toplist: res.toplist
         })
-      
+
       })
 
   }
@@ -29,7 +30,7 @@ class Home extends Component {
   getCatesList() {
     getCatesList()
       .then(res => {
-        this.setState({ cateslist: res});
+        this.setState({ cateslist: res });
       })
   }
 
@@ -41,7 +42,7 @@ class Home extends Component {
   }
 
   render() {
- 
+
     /* 
     1 请求还没有回来 标签已经渲染 正确
     2 数据回来 标签重新渲染 
@@ -61,7 +62,7 @@ class Home extends Component {
             {this.state.sliderlist.map(val => (
               <div
                 key={val.id}
-                onClick={()=>{this.props.history.push("/GoodsDetail/"+val.id)}}
+                onClick={() => { this.props.history.push("/GoodsDetail/" + val.id) }}
                 style={{ display: 'inline-block', width: '100%', height: this.state.imgHeight }}
               >
                 <img
@@ -85,7 +86,7 @@ class Home extends Component {
           <div className="top_title">推荐商品</div>
           <div className="top_content">
             {this.state.toplist.map(v => (
-              <div className="goods_top_item" key={v.id} onClick={()=>{this.props.history.push("/GoodsDetail/"+v.id)}}>
+              <div className="goods_top_item" key={v.id} onClick={() => { this.props.history.push("/GoodsDetail/" + v.id) }}>
                 {/* 左侧的图片容器 */}
                 <div className="top_img_wrap">
                   <img src={v.img_url} alt="" />
@@ -105,7 +106,7 @@ class Home extends Component {
               <div className="cate_group_title">{v1.catetitle}</div>
               <div className="cate_group_content">
                 {v1.datas.map(v2 => (
-                  <div onClick={()=>{this.props.history.push("/GoodsDetail/"+v2.artID)}} className="goods_detail" key={v2.artID}>
+                  <div onClick={() => { this.props.history.push("/GoodsDetail/" + v2.artID) }} className="goods_detail" key={v2.artID}>
                     <img src={v2.img_url} alt="" />
                     <div className="goods_name">{v2.artTitle}</div>
                     <div className="goods_price_wrap">

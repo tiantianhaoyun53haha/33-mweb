@@ -7,8 +7,5 @@ import App from './App';
 import store from "./store";
 // 2 引入store和 react的连接器
 import {  Provider } from "react-redux";
-
 // 3 将store的数据提供给App根组件 
 ReactDOM.render( <Provider store={store} ><App /></Provider>, document.getElementById('root'));
-
-
