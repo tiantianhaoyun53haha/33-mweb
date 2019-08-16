@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Icon, NavBar, SwipeAction, Checkbox } from "antd-mobile";
 // 1 准备接受store的数据
 import { connect } from "react-redux";
+import { itemChange, itemAllCheck } from "../store/actionCreator";
 const CheckboxItem = Checkbox.CheckboxItem;
 class Cart extends Component {
   render() {
@@ -40,7 +41,7 @@ class Cart extends Component {
                 <div className="cart_item_inner">
                   {/* 1 复选框 */}
                   <div className="chk_wrap">
-                    <CheckboxItem checked={v.checked} onChange={this.props.itemCheck.bind(this,v.id)}  />
+                    <CheckboxItem checked={v.checked} onChange={this.props.itemCheck.bind(this, v.id)} />
                   </div>
                   {/* 2 图片 */}
                   <div className="goods_img_wrap">
@@ -62,20 +63,20 @@ class Cart extends Component {
                 </div>
               </SwipeAction>
             </div>
-          )} 
+          )}
         </div>
         <div className="footer_tool">
-   
-            <div className="all_chk_wrap">
-              <CheckboxItem onChange={this.props.itemAllCheck} checked={this.props.allChecked}>全选</CheckboxItem>
+
+          <div className="all_chk_wrap">
+            <CheckboxItem onChange={this.props.itemAllCheck} checked={this.props.allChecked}>全选</CheckboxItem>
+          </div>
+          <div className="tota_price_wrap">
+            合计 <span>￥{999}</span>
+          </div>
+          <div className="pay_wrap">
+            去结算({10})
             </div>
-            <div className="tota_price_wrap">
-              合计 <span>￥{999}</span>
-            </div>
-            <div className="pay_wrap">
-              去结算({10})
-            </div>
-       
+
         </div>
         {/* 购物车内容 结束*/}
         <style jsx>{`.cart_content {
@@ -191,30 +192,24 @@ const mapStateToProps = (state) => {
   return {
     carts: state.cartReducer.carts,
     // 全选状态 every方法的注意 空数组的时候 直接返回true
-    allChecked:state.cartReducer.carts.length&&state.cartReducer.carts.every(v=>v.checked)
+    allChecked: state.cartReducer.carts.length && state.cartReducer.carts.every(v => v.checked)
   }
 }
 
 // 将action映射到 props里面
-const mapDispatchToProps=(dispatch)=>{
+const mapDispatchToProps = (dispatch) => {
   return {
-    itemCheck:(id)=>{
+    itemCheck: (id) => {
       // 就会跳转到 购物车管理员中了！
-      dispatch({
-        type:"item_change",
-        value:{id}
-      })
+      dispatch(itemChange(id))
     },
-    itemAllCheck:(e)=>{
+    itemAllCheck: (e) => {
       // 1 获取自己的当前的选中状态  点击之后的状态的值 
-      let {checked}=e.target;
+      let { checked } = e.target;
       // 2 取反
       // checked=!checked;
       // 3 传递管理员中
-      dispatch({
-        type:"item_all_check",
-        value:{checked}
-      })
+      dispatch(itemAllCheck(checked))
       // 4 遍历购物车的商品 让他们的选中状态 都等于取反后的状态
     }
   }

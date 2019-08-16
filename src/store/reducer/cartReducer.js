@@ -1,3 +1,5 @@
+import { ITEM_CHANGE, ITEM_ALL_CHECK } from "../actionTypes";
+
 // 1 定义默认的购物车数据
 const defaultState = {
   carts: [{
@@ -22,7 +24,7 @@ const defaultState = {
 export default (state = defaultState, action) => {
 
   switch (action.type) {
-    case "item_change":
+    case ITEM_CHANGE:
       {
         // 0 获取要修改的商品对象 id
         const { id } = action.value;
@@ -35,9 +37,9 @@ export default (state = defaultState, action) => {
         return newState;
         break;
       }
-    case "item_all_check":
+    case ITEM_ALL_CHECK:
       {
-        const {checked} = action.value;
+        const { checked } = action.value;
 
         let newState = JSON.parse(JSON.stringify(state));
         newState.carts.forEach(v => v.checked = checked);
