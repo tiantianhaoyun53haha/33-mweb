@@ -1,4 +1,4 @@
-import { ITEM_CHANGE, ITEM_ALL_CHECK, ITEM_NUM_UPDATE } from "../actionTypes";
+import { ITEM_CHANGE, ITEM_ALL_CHECK, ITEM_NUM_UPDATE, ITEM_REMOVE } from "../actionTypes";
 
 // 1 定义默认的购物车数据
 const defaultState = {
@@ -46,10 +46,18 @@ export default (state = defaultState, action) => {
         break;
       }
     case ITEM_NUM_UPDATE: {
-      const {id,unit}=action.value;
+      const { id, unit } = action.value;
       let newState = JSON.parse(JSON.stringify(state));
       let index = newState.carts.findIndex((v) => v.id === id);
-      newState.carts[index].num+=unit;
+      newState.carts[index].num += unit;
+      return newState;
+      break;
+    }
+    case ITEM_REMOVE: {
+      const { id } = action.value;
+      let newState = JSON.parse(JSON.stringify(state));
+      let index = newState.carts.findIndex((v) => v.id === id);
+      newState.carts.splice(index,1);
       return newState;
       break;
     }
