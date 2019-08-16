@@ -8,7 +8,7 @@ const CheckboxItem = Checkbox.CheckboxItem;
 const alert = Modal.alert;
 class Cart extends Component {
   render() {
-
+    console.log(this.props);
     return (
       <div className="cart">
         {/* 导航栏 开始 */}
@@ -103,7 +103,11 @@ class Cart extends Component {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        overflow: hidden;
         .goods_name {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
         .goods_price {
           color: red;

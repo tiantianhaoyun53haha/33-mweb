@@ -1,4 +1,4 @@
-import { ITEM_CHANGE, ITEM_ALL_CHECK, ITEM_NUM_UPDATE, ITEM_REMOVE } from "../actionTypes";
+import { ITEM_CHANGE, ITEM_ALL_CHECK, ITEM_NUM_UPDATE, ITEM_REMOVE, ITEM_ADD } from "../actionTypes";
 
 /**
  * 返回 切换选中商品的action
@@ -45,5 +45,16 @@ export  const itemRemove=(id)=>{
   return {
     type:ITEM_REMOVE,
     value:{id}
+  }
+}
+
+/**
+ * 执行购物车的添加 或者增加数量
+ * @param {object} goodsObj 要添加的商品对象
+ */
+export const itemAdd=(goodsObj)=>{
+  return{
+    type:ITEM_ADD,
+    value:{goodsObj}
   }
 }

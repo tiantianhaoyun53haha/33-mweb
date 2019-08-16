@@ -18,3 +18,8 @@ export const ITEM_NUM_UPDATE = "ITEM_NUM_UPDATE";
  */
 export const ITEM_REMOVE = "ITEM_REMOVE";
 
+
+/**
+ * 购物车 添加
+ */
+export const ITEM_ADD="ITEM_ADD";

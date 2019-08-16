@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { NavBar, Icon, Carousel } from 'antd-mobile';
 import { getGoodsInfo } from "../request";
+import {  connect} from "react-redux";
+import { itemAdd  } from "../store/actionCreator";
 class GoodsDetail extends Component {
   state = {
     // 商品详情对象
@@ -99,11 +101,12 @@ class GoodsDetail extends Component {
             <div className="iconfont icon-kefu"></div>
             <div className="tool_item_name">客服</div>
           </div>
-          <div className="tool_item">
+          <div className="tool_item item_cart" onClick={()=>{this.props.history.push("/Cart")}} >
             <div className="iconfont icon-gouwuche"></div>
             <div className="tool_item_name">购物车</div>
+            <span className="cart_badge">{this.props.totalNums}</span>
           </div>
-          <div className="tool_item cart_add">
+          <div className="tool_item cart_add" onClick={()=>{this.props.itemAdd(goodsinfo)}} >
             加入购物车
           </div>
           <div className="tool_item buy_now">
@@ -233,6 +236,22 @@ background-color: #fff;
 
     }
   }
+  .item_cart{
+    position:relative;
+    .cart_badge{
+      position: absolute;
+    background-color: orangered;
+    color: #fff;
+    top: -9px;
+    right: 5px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+  }
 
   .tool_item.cart_add {
     flex: 2;
@@ -256,4 +275,20 @@ background-color: #fff;
     );
   }
 }
-export default GoodsDetail;
+const mapStateToProps=(state)=>{
+  let {carts}=state.cartReducer;
+  return{
+    // 购买的数量
+    totalNums: carts.reduce((beforeSum, v) => (v.checked ? (beforeSum + v.num) : beforeSum), 0)
+  }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+return{
+  itemAdd:(obj)=>{
+    dispatch(itemAdd(obj));
+  }
+}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(GoodsDetail);
